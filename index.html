@@ -20,12 +20,12 @@
             --dark-text: #311b92;
             --border: #d1c4e9;
         }
-        
+
         * {
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
         }
-        
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--light-bg);
@@ -34,7 +34,7 @@
             padding: 0;
             min-height: 100vh;
         }
-        
+
         /* Login Screen */
         #loginScreen {
             display: flex;
@@ -45,7 +45,7 @@
             padding: 20px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
         }
-        
+
         #loginForm {
             background: white;
             padding: 30px;
@@ -54,14 +54,16 @@
             max-width: 400px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
-        
+
         #loginForm h2 {
             color: var(--primary);
             text-align: center;
             margin-bottom: 25px;
         }
-        
-        #loginForm input {
+
+        #loginForm select,
+        #loginForm input,
+        #loginForm button {
             width: 100%;
             padding: 14px;
             margin-bottom: 15px;
@@ -69,20 +71,16 @@
             border-radius: 6px;
             font-size: 16px;
         }
-        
+
         #loginForm button {
-            width: 100%;
-            padding: 14px;
             background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
             border: none;
-            border-radius: 6px;
-            font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             margin-top: 10px;
         }
-        
+
         /* Main App (initially hidden) */
         #appContainer {
             display: none;
@@ -90,7 +88,7 @@
             max-width: 1000px;
             margin: 0 auto;
         }
-        
+
         /* Header */
         .app-header {
             display: flex;
@@ -98,13 +96,13 @@
             align-items: center;
             margin-bottom: 20px;
         }
-        
+
         .app-header h1 {
             color: var(--primary);
             margin: 0;
             font-size: 24px;
         }
-        
+
         #logoutBtn {
             background: var(--danger);
             color: white;
@@ -113,7 +111,7 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        
+
         /* Form Styles */
         #workoutForm {
             background-color: white;
@@ -122,33 +120,39 @@
             margin-bottom: 20px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
-        
+
         .form-row {
             display: flex;
             gap: 15px;
             margin-bottom: 15px;
         }
-        
+
         .form-group {
             flex: 1;
         }
-        
+
         #workoutForm label {
             display: block;
             margin-bottom: 5px;
             font-weight: 600;
             color: var(--dark-text);
         }
-        
+
         #workoutForm input,
-        #workoutForm select {
+        #workoutForm select,
+        #workoutForm textarea {
             width: 100%;
             padding: 12px;
             border: 1px solid var(--border);
             border-radius: 6px;
             font-size: 16px;
         }
-        
+
+        #workoutForm textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
         #workoutForm button {
             width: 100%;
             padding: 14px;
@@ -161,7 +165,7 @@
             cursor: pointer;
             margin-top: 10px;
         }
-        
+
         /* Action Buttons */
         .action-buttons {
             display: grid;
@@ -169,7 +173,7 @@
             gap: 10px;
             margin: 20px 0;
         }
-        
+
         .action-buttons button {
             padding: 12px;
             border: none;
@@ -179,11 +183,11 @@
             font-weight: 600;
             cursor: pointer;
         }
-        
+
         #exportBtn { background-color: var(--success); }
         #importBtn { background-color: var(--info); }
         #clearDataBtn { background-color: var(--danger); }
-        
+
         /* Timer */
         #workoutTimer {
             background: white;
@@ -193,14 +197,14 @@
             text-align: center;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
-        
+
         #timerDisplay {
             font-size: 3rem;
             font-family: monospace;
             margin: 15px 0;
             color: var(--dark-text);
         }
-        
+
         .timer-btn {
             padding: 10px 20px;
             margin: 0 5px;
@@ -210,17 +214,17 @@
             font-weight: 600;
             cursor: pointer;
         }
-        
+
         #startTimer { background-color: var(--success); }
         #resetTimer { background-color: var(--danger); }
-        
+
         .rest-timer-btns {
             display: flex;
             justify-content: center;
             gap: 10px;
             margin-top: 15px;
         }
-        
+
         .rest-timer-btn {
             padding: 8px 15px;
             background-color: var(--info);
@@ -229,7 +233,7 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        
+
         /* Progress Reports */
         #progressReports {
             background: white;
@@ -238,51 +242,51 @@
             margin-bottom: 20px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
-        
+
         /* Table Styles */
         .table-container {
             overflow-x: auto;
             margin-bottom: 20px;
         }
-        
+
         .workout-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 15px;
         }
-        
+
         .workout-table th,
         .workout-table td {
             padding: 12px 8px;
             text-align: left;
             border-bottom: 1px solid var(--border);
         }
-        
+
         .workout-table th {
             background-color: var(--primary);
             color: white;
             position: sticky;
             top: 0;
         }
-        
+
         .workout-table tr:nth-child(even) {
             background-color: rgba(209, 196, 233, 0.2);
         }
-        
+
         /* Charts */
         .chart-container {
             position: relative;
             height: 300px;
             margin: 20px 0;
         }
-        
+
         /* Responsive Adjustments */
         @media (max-width: 768px) {
             .form-row {
                 flex-direction: column;
                 gap: 10px;
             }
-            
+
             .rest-timer-btns {
                 flex-wrap: wrap;
             }
@@ -290,26 +294,31 @@
     </style>
 </head>
 <body>
-    <!-- Login Screen -->
     <div id="loginScreen">
         <form id="loginForm">
             <h2>Workout Tracker Pro</h2>
+            <select id="userSelect">
+                <option value="">Select User</option>
+                <option value="sam">Sam</option>
+                <option value="james">James</option>
+            </select>
             <input type="password" id="passwordInput" placeholder="Enter your password" required>
             <button type="submit">Unlock App</button>
             <p id="loginError" style="color: var(--danger); text-align: center; margin-top: 10px; display: none;">
                 Incorrect password. Try again.
             </p>
+            <p id="userError" style="color: var(--danger); text-align: center; margin-top: 10px; display: none;">
+                Please select a user.
+            </p>
         </form>
     </div>
 
-    <!-- Main App Container -->
     <div id="appContainer">
         <div class="app-header">
             <h1>Workout Tracker</h1>
             <button id="logoutBtn">Logout</button>
         </div>
-        
-        <!-- Workout Form -->
+
         <form id="workoutForm">
             <div class="form-row">
                 <div class="form-group">
@@ -321,10 +330,11 @@
                     <select id="workoutType" required>
                         <option value="Workout A">Workout A (Upper Body)</option>
                         <option value="Workout B">Workout B (Lower Body)</option>
+                        <option value="Upper Body 2 (Chest & Back)">Upper Body 2 (Chest & Back)</option>
                     </select>
                 </div>
             </div>
-            
+
             <div class="form-row">
                 <div class="form-group">
                     <label for="exercise">Exercise</label>
@@ -335,7 +345,7 @@
                     <input type="number" id="setNumber" min="1" required>
                 </div>
             </div>
-            
+
             <div class="form-row">
                 <div class="form-group">
                     <label for="reps">Reps</label>
@@ -346,18 +356,21 @@
                     <input type="number" id="weight" min="0" step="0.1" required>
                 </div>
             </div>
-            
+
+            <div class="form-group">
+                <label for="techniquePointers">Technique Pointers</label>
+                <textarea id="techniquePointers" readonly placeholder="Select an exercise to view technique pointers"></textarea>
+            </div>
+
             <button type="submit">Add Workout</button>
         </form>
-        
-        <!-- Action Buttons -->
+
         <div class="action-buttons">
             <button id="exportBtn">Export Data</button>
             <button id="importBtn">Import Data</button>
             <button id="clearDataBtn">Clear Data</button>
         </div>
-        
-        <!-- Workout Timer -->
+
         <div id="workoutTimer">
             <h3>Workout Timer</h3>
             <div id="timerDisplay">00:00</div>
@@ -372,8 +385,7 @@
                 <button class="rest-timer-btn" data-seconds="120">2m Rest</button>
             </div>
         </div>
-        
-        <!-- Progress Reports -->
+
         <div id="progressReports">
             <h3>Weekly Progress Report</h3>
             <div class="chart-container">
@@ -381,8 +393,7 @@
             </div>
             <div id="weeklyStats"></div>
         </div>
-        
-        <!-- Workout Log Table -->
+
         <div class="table-container">
             <table class="workout-table">
                 <thead>
@@ -399,8 +410,7 @@
                 <tbody id="workoutTableBody"></tbody>
             </table>
         </div>
-        
-        <!-- Exercise Charts -->
+
         <div id="exerciseCharts">
             <h3>Exercise Progress</h3>
             <div id="chartContainer"></div>
@@ -416,20 +426,37 @@
             const loginForm = document.getElementById('loginForm');
             const passwordInput = document.getElementById('passwordInput');
             const loginError = document.getElementById('loginError');
+            const userSelect = document.getElementById('userSelect');
+            const userError = document.getElementById('userError');
             const logoutBtn = document.getElementById('logoutBtn');
-            
+
+            let loggedInUser = null;
+
             // Check if already logged in (session storage)
-            if (sessionStorage.getItem('workoutAuth') === 'true') {
+            const storedUser = sessionStorage.getItem('workoutUser');
+            if (storedUser && sessionStorage.getItem(`workoutAuth_${storedUser}`) === 'true') {
+                loggedInUser = storedUser;
                 loginScreen.style.display = 'none';
                 appContainer.style.display = 'block';
                 initializeApp();
             }
-            
+
             // Handle login
             loginForm.addEventListener('submit', function(e) {
                 e.preventDefault();
+                const selectedUser = userSelect.value;
+
+                if (!selectedUser) {
+                    userError.style.display = 'block';
+                    loginError.style.display = 'none';
+                    return;
+                }
+                userError.style.display = 'none';
+
                 if (passwordInput.value === APP_PASSWORD) {
-                    sessionStorage.setItem('workoutAuth', 'true');
+                    loggedInUser = selectedUser;
+                    sessionStorage.setItem('workoutUser', selectedUser);
+                    sessionStorage.setItem(`workoutAuth_${selectedUser}`, 'true');
                     loginScreen.style.display = 'none';
                     appContainer.style.display = 'block';
                     loginError.style.display = 'none';
@@ -439,70 +466,124 @@
                     passwordInput.value = '';
                 }
             });
-            
+
             // Handle logout
             logoutBtn.addEventListener('click', function() {
-                sessionStorage.removeItem('workoutAuth');
+                if (loggedInUser) {
+                    sessionStorage.removeItem(`workoutAuth_${loggedInUser}`);
+                    sessionStorage.removeItem('workoutUser');
+                    loggedInUser = null;
+                }
                 location.reload();
             });
-            
+
             function initializeApp() {
                 // ========== WORKOUT TRACKER FUNCTIONALITY ==========
                 // Initialize with today's date
                 const today = new Date().toISOString().split('T')[0];
                 document.getElementById('workoutDate').value = today;
-                
+
                 // Workout Plans
                 const workoutPlans = {
                     'Workout A': ['Bench Press', 'Incline Press', 'Pull-Ups', 'Lateral Raises', 'Tricep Pushdowns'],
-                    'Workout B': ['Squat', 'Deadlift', 'Leg Press', 'Calf Raises', 'Hamstring Curls']
+                    'Workout B': ['Squat', 'Deadlift', 'Leg Press', 'Calf Raises', 'Hamstring Curls'],
+                    'Upper Body 2 (Chest & Back)': [
+                        'Bench Press',
+                        'Weighted Wide Grip Pull Up with Two Forced Negatives',
+                        'Barbell Floor Press',
+                        'Unilateral Cable Row',
+                        'Arnold Press',
+                        'Reverse PEC Deck',
+                        'Rope Tricep Pushdown (21s)',
+                        '(Optional) Constant Tension Preacher Curl'
+                    ]
                 };
-                
-                let workouts = JSON.parse(localStorage.getItem('workoutData')) || [];
+
+                const exerciseTechniques = {
+                    'Bench Press': `Sets and Reps: Three sets. Week 1: 6 reps, Week 2: 7 reps, Week 3: 8 reps, Week 4: back to 6 reps with more weight.
+Grip and Arch: Use a wider grip and a bigger arch compared to the first upper body day...
+Execution: Use explosive power off the chest... Lower the weight back down under control... Bring the bar down to the highest contact point on your chest, pause briefly (half a second), and then explode upwards... Think about pushing the floor away from you.
+Goal: Maximize the weight used while maintaining a full range of motion and proper position.
+The bench press is considered a key overall mass builder for the pecs...`,
+                    'Weighted Wide Grip Pull Up with Two Forced Negatives': `Sets and Reps: Three sets of 8 reps with two forced negatives on every set.
+Execution: Perform 8 reps with a full stretch at the bottom and a full contraction at the top... After the 8th rep, use a box to jump up over the bar...
+Focus: Feel a strong stretch and a strong mind-muscle connection with your lats...
+Progression: If you can't do 8 reps with good form...
+Benefit of Negatives: Heavy negatives may elicit greater motor unit fatigue...`,
+                    'Barbell Floor Press': `Sets and Reps: Two sets of 8 to 10 reps.
+Grip: You can use a standard 1.5 times shoulder-width grip or so...
+Execution: This exercise eliminates leg drive... Start light and progressively overload.
+Benefits: This is considered an underrated exercise for hypertrophy of the pushing muscles...`,
+                    'Unilateral Cable Row': `Sets and Reps: Three sets of twelve reps per side.
+Execution: Isolate each side one at a time...
+Focus: Think about driving the elbows down and in against the sides...`,
+                    'Arnold Press': `Sets and Reps: Two sets of twelve reps.
+Execution: Initiate the press with horizontal shoulder abduction... Then, it transitions into a more standard dumbbell shoulder press... Performing this exercise standing will force you to use lighter weights...
+Benefits: This is a solid overall shoulder builder...`,
+                    'Reverse PEC Deck': `Sets and Reps: Two sets of ten and ten reps (mechanical drop set).
+Execution: For the first ten reps, slouch the upper body forward... For the next ten reps, without resting or dropping weight, straighten the back...
+Intensity: You should be reaching near failure on the first 10 reps...`,
+                    'Rope Tricep Pushdown (21s)': `Sets and Reps: Three sets of 21 total reps...
+Focus: In the bottom half, focus on squeezing the triceps... In the top half, focus on stretching the triceps... The final seven reps are through a full range of motion...
+Intensity: Unlike the compound pressing movements...`,
+                    '(Optional) Constant Tension Preacher Curl': `Sets and Reps: Two sets of 15 to 20 reps.
+Focus: Isolate the biceps by not resting between reps and keeping the hands and forearms as loose as possible... You can even let your wrists go into a bit of extension...
+Reason for Inclusion: To maximize bicep development through direct isolation work...`
+                };
+
+                let workouts = JSON.parse(localStorage.getItem(`workoutData_${loggedInUser}`)) || [];
                 let charts = {};
-                
+
                 // DOM Elements
                 const workoutForm = document.getElementById('workoutForm');
                 const workoutTableBody = document.getElementById('workoutTableBody');
                 const chartContainer = document.getElementById('chartContainer');
                 const weeklyVolumeChartCtx = document.getElementById('weeklyVolumeChart');
                 const weeklyStats = document.getElementById('weeklyStats');
-                
+                const exerciseSelect = document.getElementById('exercise');
+                const techniquePointersTextarea = document.getElementById('techniquePointers');
+
                 // Initialize exercise dropdown
                 updateExerciseDropdown();
-                
+
                 // Event Listeners
                 document.getElementById('workoutType').addEventListener('change', updateExerciseDropdown);
                 workoutForm.addEventListener('submit', handleFormSubmit);
                 document.getElementById('exportBtn').addEventListener('click', exportData);
                 document.getElementById('importBtn').addEventListener('click', importData);
                 document.getElementById('clearDataBtn').addEventListener('click', clearData);
-                
+                exerciseSelect.addEventListener('change', displayTechniquePointers);
+
                 // Load saved data
                 loadWorkouts();
-                
+
+                function displayTechniquePointers() {
+                    const selectedExercise = exerciseSelect.value;
+                    techniquePointersTextarea.value = exerciseTechniques[selectedExercise] || '';
+                }
+
                 // ========== TIMER FUNCTIONALITY ==========
                 let timerInterval;
                 let seconds = 0;
                 let isRestTimer = false;
-                
+
                 document.getElementById('startTimer').addEventListener('click', toggleTimer);
                 document.getElementById('resetTimer').addEventListener('click', resetTimer);
-                
+
                 document.querySelectorAll('.rest-timer-btn').forEach(btn => {
                     btn.addEventListener('click', function() {
                         seconds = parseInt(this.dataset.seconds);
                         isRestTimer = true;
                         updateTimerDisplay();
-                        
+
                         if (timerInterval) clearInterval(timerInterval);
                         timerInterval = setInterval(countdown, 1000);
-                        
+
                         // Vibrate when rest timer starts (mobile only)
                         if (navigator.vibrate) navigator.vibrate(200);
                     });
                 });
-                
+
                 function toggleTimer() {
                     if (!timerInterval) {
                         timerInterval = setInterval(() => {
@@ -516,7 +597,7 @@
                         document.getElementById('startTimer').textContent = isRestTimer ? 'Start' : 'Resume';
                     }
                 }
-                
+
                 function resetTimer() {
                     clearInterval(timerInterval);
                     timerInterval = null;
@@ -525,13 +606,13 @@
                     updateTimerDisplay();
                     document.getElementById('startTimer').textContent = 'Start';
                 }
-                
+
                 function countdown() {
                     if (seconds <= 0) {
                         clearInterval(timerInterval);
                         timerInterval = null;
                         isRestTimer = false;
-                        
+
                         // Vibrate when timer completes (mobile only)
                         if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
                     } else {
@@ -539,13 +620,13 @@
                         updateTimerDisplay();
                     }
                 }
-                
+
                 function updateTimerDisplay() {
                     const mins = Math.floor(seconds / 60);
                     const secs = seconds % 60;
-                    document.getElementById('timerDisplay').textContent = 
+                    document.getElementById('timerDisplay').textContent =
                         `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-                    
+
                     // Change color when rest timer is running
                     if (isRestTimer && seconds <= 10) {
                         document.getElementById('timerDisplay').style.color = 'var(--danger)';
@@ -553,24 +634,28 @@
                         document.getElementById('timerDisplay').style.color = 'var(--dark-text)';
                     }
                 }
-                
+
                 // ========== WORKOUT TRACKER FUNCTIONS ==========
                 function updateExerciseDropdown() {
                     const type = document.getElementById('workoutType').value;
                     const exerciseSelect = document.getElementById('exercise');
-                    
+                    const techniquePointersTextarea = document.getElementById('techniquePointers');
+
                     exerciseSelect.innerHTML = '';
-                    workoutPlans[type].forEach(exercise => {
-                        const option = document.createElement('option');
-                        option.value = exercise;
-                        option.textContent = exercise;
-                        exerciseSelect.appendChild(option);
-                    });
+                    if (workoutPlans[type]) {
+                        workoutPlans[type].forEach(exercise => {
+                            const option = document.createElement('option');
+                            option.value = exercise;
+                            option.textContent = exercise;
+                            exerciseSelect.appendChild(option);
+                        });
+                    }
+                    techniquePointersTextarea.value = ''; // Clear technique pointers when workout type changes
                 }
-                
+
                 function handleFormSubmit(e) {
                     e.preventDefault();
-                    
+
                     const newWorkout = {
                         date: document.getElementById('workoutDate').value,
                         workoutType: document.getElementById('workoutType').value,
@@ -582,20 +667,20 @@
                             return this.weight * this.reps * this.setNumber;
                         }
                     };
-                    
+
                     workouts.push(newWorkout);
                     saveWorkouts();
                     addWorkoutToTable(newWorkout);
                     renderChart(newWorkout.exercise);
                     generateWeeklyReport();
-                    
+
                     // Reset form (keep date and type)
                     workoutForm.reset();
                     document.getElementById('workoutDate').value = today;
                     document.getElementById('workoutType').value = newWorkout.workoutType;
                     updateExerciseDropdown();
                 }
-                
+
                 function addWorkoutToTable(workout) {
                     const row = document.createElement('tr');
                     row.innerHTML = `
@@ -609,19 +694,19 @@
                     `;
                     workoutTableBody.appendChild(row);
                 }
-                
+
                 function renderChart(exerciseName) {
                     // Filter and sort workouts for this exercise
                     const exerciseData = workouts
                         .filter(w => w.exercise === exerciseName)
                         .sort((a, b) => new Date(a.date) - new Date(b.date));
-                    
+
                     if (exerciseData.length === 0) return;
-                    
+
                     // Prepare chart data
                     const dates = exerciseData.map(w => w.date);
                     const weights = exerciseData.map(w => w.weight);
-                    
+
                     // Create canvas if it doesn't exist
                     let canvas = document.getElementById(`chart-${exerciseName}`);
                     if (!canvas) {
@@ -630,7 +715,7 @@
                         canvas.height = 300;
                         chartContainer.appendChild(canvas);
                     }
-                    
+
                     // Create or update chart
                     if (!charts[exerciseName]) {
                         charts[exerciseName] = new Chart(canvas, {
@@ -650,7 +735,7 @@
                                 responsive: true,
                                 maintainAspectRatio: false,
                                 scales: {
-                                    y: { 
+                                    y: {
                                         beginAtZero: true,
                                         title: {
                                             display: true,
@@ -672,7 +757,7 @@
                         charts[exerciseName].update();
                     }
                 }
-                
+
                 function generateWeeklyReport() {
                     // Group by week
                     const weeklyData = workouts.reduce((acc, workout) => {
@@ -691,11 +776,11 @@
                         acc[weekStart].maxWeight = Math.max(acc[weekStart].maxWeight, workout.weight);
                         return acc;
                     }, {});
-                    
+
                     // Prepare chart data
                     const weeks = Object.keys(weeklyData).sort();
                     const volumes = weeks.map(week => weeklyData[week].totalVolume);
-                    
+
                     // Create or update weekly volume chart
                     if (!charts['weeklyVolume']) {
                         charts['weeklyVolume'] = new Chart(weeklyVolumeChartCtx, {
@@ -733,7 +818,7 @@
                         charts['weeklyVolume'].data.datasets[0].data = volumes;
                         charts['weeklyVolume'].update();
                     }
-                    
+
                     // Generate stats HTML
                     let statsHTML = '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 20px;">';
                     weeks.forEach(week => {
@@ -750,72 +835,72 @@
                     statsHTML += '</div>';
                     weeklyStats.innerHTML = statsHTML;
                 }
-                
+
                 function getWeekStartDate(dateStr) {
                     const date = new Date(dateStr);
                     const day = date.getDay();
                     const diff = date.getDate() - day + (day === 0 ? -6 : 1); // Adjust for Sunday
                     return new Date(date.setDate(diff)).toISOString().split('T')[0];
                 }
-                
+
                 function formatDate(dateStr) {
                     const options = { month: 'short', day: 'numeric' };
                     return new Date(dateStr).toLocaleDateString(undefined, options);
                 }
-                
+
                 // ========== DATA PERSISTENCE FUNCTIONS ==========
                 function loadWorkouts() {
                     if (workouts.length > 0) {
                         workouts.forEach(w => addWorkoutToTable(w));
-                        
+
                         // Render charts for all exercises
                         const allExercises = [...new Set(workouts.map(w => w.exercise))];
                         allExercises.forEach(ex => renderChart(ex));
-                        
+
                         // Generate weekly report
                         generateWeeklyReport();
                     }
                 }
-                
+
                 function saveWorkouts() {
-                    localStorage.setItem('workoutData', JSON.stringify(workouts));
+                    localStorage.setItem(`workoutData_${loggedInUser}`, JSON.stringify(workouts));
                 }
-                
+
                 function exportData() {
                     const data = JSON.stringify(workouts, null, 2);
                     const blob = new Blob([data], { type: 'application/json' });
                     const url = URL.createObjectURL(blob);
-                    
+
                     const a = document.createElement('a');
                     a.href = url;
-                    a.download = `workout-data-${new Date().toISOString().split('T')[0]}.json`;
+                    a.download = `workout-data-${loggedInUser}-${new Date().toISOString().split('T')[0]}.json`;
                     a.click();
-                    
+
                     URL.revokeObjectURL(url);
                 }
-                
+
                 function importData() {
                     const input = document.createElement('input');
                     input.type = 'file';
                     input.accept = '.json';
-                    
+
                     input.onchange = e => {
                         const file = e.target.files[0];
                         const reader = new FileReader();
-                        
+
                         reader.onload = event => {
                             try {
                                 const imported = JSON.parse(event.target.result);
                                 if (Array.isArray(imported)) {
                                     workouts = imported;
                                     saveWorkouts();
-                                    
+
                                     // Refresh UI
                                     workoutTableBody.innerHTML = '';
                                     chartContainer.innerHTML = '';
                                     weeklyStats.innerHTML = '';
                                     charts = {};
-                                    
+
                                     loadWorkouts();
                                     alert('Data imported successfully!');
                                 } else {
@@ -825,24 +910,24 @@
                                 alert('Error parsing file');
                             }
                         };
-                        
+
                         reader.readAsText(file);
                     };
-                    
+
                     input.click();
                 }
-                
+
                 function clearData() {
-                    if (confirm('Are you sure you want to delete ALL workout data? This cannot be undone.')) {
+                    if (confirm('Are you sure you want to delete ALL workout data for the current user? This cannot be undone.')) {
                         workouts = [];
-                        localStorage.removeItem('workoutData');
+                        localStorage.removeItem(`workoutData_${loggedInUser}`);
                         workoutTableBody.innerHTML = '';
                         chartContainer.innerHTML = '';
                         weeklyStats.innerHTML = '';
                         charts = {};
                     }
                 }
-                
+
                 // Fix iOS viewport scaling
                 document.addEventListener('touchmove', function(e) {
                     if (e.scale !== 1) { e.preventDefault(); }
