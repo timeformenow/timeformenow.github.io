@@ -436,6 +436,7 @@
             const logoutBtn = document.getElementById('logoutBtn');
 
             let loggedInUser = null;
+            let db; // Global variable to hold the IndexedDB database object
 
             // Check if already logged in (session storage)
             const storedUser = sessionStorage.getItem('workoutUser');
@@ -536,7 +537,7 @@
                         <strong>Reason for Inclusion:</strong> To maximize bicep development through direct isolation work...`
                 };
 
-                let workouts = JSON.parse(localStorage.getItem(`workoutData_${loggedInUser}`)) || [];
+                let workouts = [];
                 let charts = {};
 
                 // DOM Elements
@@ -551,6 +552,9 @@
                 // Initialize exercise dropdown
                 updateExerciseDropdown();
 
+                // Initialize IndexedDB
+                initIndexedDB();
+
                 // Event Listeners
                 document.getElementById('workoutType').addEventListener('change', updateExerciseDropdown);
                 workoutForm.addEventListener('submit', handleFormSubmit);
@@ -562,6 +566,61 @@
                 function displayTechniquePointers() {
                     const selectedExercise = exerciseSelect.value;
                     techniquePointersDiv.innerHTML = exerciseTechniques[selectedExercise] || '';
+                }
+
+                function initIndexedDB() {
+                    const request = indexedDB.open("workoutTrackerDB", 1);
+
+                    request.onupgradeneeded = function(event) {
+                        const db = event.target.result;
+                        if (!db.objectStoreNames.contains('workouts')) {
+                            db.createObjectStore('workouts', { keyPath: 'id', autoIncrement: true });
+                        }
+                    };
+
+                    request.onsuccess = function(event) {
+                        db = event.target.result;
+                        loadWorkoutsFromIndexedDB();
+                    };
+
+                    request.onerror = function(event) {
+                        console.error("Error opening database:", event.target.errorCode);
+                    };
+                }
+
+                function saveWorkouts() {
+                    const transaction = db.transaction(['workouts'], 'readwrite');
+                    const workoutStore = transaction.objectStore('workouts');
+                    workouts.forEach(workout => workoutStore.put(workout)); // Use put to update if ID exists
+                }
+
+                function loadWorkoutsFromIndexedDB() {
+                    const transaction = db.transaction(['workouts'], 'readonly');
+                    const workoutStore = transaction.objectStore('workouts');
+                    const request = workoutStore.getAll();
+
+                    request.onsuccess = function(event) {
+                        workouts = event.target.result;
+                        loadWorkouts(); // Call the function to update the UI
+                    };
+
+                    request.onerror = function(event) {
+                        console.error("Error loading workouts from IndexedDB:", event.target.errorCode);
+                    };
+                }
+
+                function clearIndexedDBData() {
+                    const transaction = db.transaction(['workouts'], 'readwrite');
+                    const workoutStore = transaction.objectStore('workouts');
+                    const request = workoutStore.clear();
+                    request.onsuccess = function() {
+                        workouts = [];
+                        loadWorkouts(); // Update UI after clearing
+                        alert('Workout data cleared.');
+                    };
+                    request.onerror = function(event) {
+                        console.error("Error clearing IndexedDB data:", event.target.errorCode);
+                    };
                 }
 
                 // ========== TIMER FUNCTIONALITY ==========
@@ -852,6 +911,10 @@
 
                 // ========== DATA PERSISTENCE FUNCTIONS ==========
                 function loadWorkouts() {
+                    workoutTableBody.innerHTML = '';
+                    chartContainer.innerHTML = '';
+                    weeklyStats.innerHTML = '';
+                    charts = {};
                     if (workouts.length > 0) {
                         workouts.forEach(w => addWorkoutToTable(w));
 
@@ -864,21 +927,23 @@
                     }
                 }
 
-                function saveWorkouts() {
-                    localStorage.setItem(`workoutData_${loggedInUser}`, JSON.stringify(workouts));
-                }
-
                 function exportData() {
-                    const data = JSON.stringify(workouts, null, 2);
-                    const blob = new Blob([data], { type: 'application/json' });
-                    const url = URL.createObjectURL(blob);
+                    const transaction = db.transaction(['workouts'], 'readonly');
+                    const workoutStore = transaction.objectStore('workouts');
+                    const request = workoutStore.getAll();
 
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = `workout-data-${loggedInUser}-${new Date().toISOString().split('T')[0]}.json`;
-                    a.click();
+                    request.onsuccess = function(event) {
+                        const data = JSON.stringify(event.target.result, null, 2);
+                        const blob = new Blob([data], { type: 'application/json' });
+                        const url = URL.createObjectURL(blob);
 
-                    URL.revokeObjectURL(url);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `workout-data-${loggedInUser}-${new Date().toISOString().split('T')[0]}.json`;
+                        a.click();
+
+                        URL.revokeObjectURL(url);
+                    };
                 }
 
                 function importData() {
@@ -894,17 +959,18 @@
                             try {
                                 const imported = JSON.parse(event.target.result);
                                 if (Array.isArray(imported)) {
-                                    workouts = imported;
-                                    saveWorkouts();
-
-                                    // Refresh UI
-                                    workoutTableBody.innerHTML = '';
-                                    chartContainer.innerHTML = '';
-                                    weeklyStats.innerHTML = '';
-                                    charts = {};
-
-                                    loadWorkouts();
-                                    alert('Data imported successfully!');
+                                    clearIndexedDBData(); // Clear existing data
+                                    const transaction = db.transaction(['workouts'], 'readwrite');
+                                    const workoutStore = transaction.objectStore('workouts');
+                                    imported.forEach(workout => workoutStore.add(workout));
+                                    transaction.oncomplete = function() {
+                                        loadWorkoutsFromIndexedDB();
+                                        alert('Data imported successfully!');
+                                    };
+                                    transaction.onerror = function(event) {
+                                        console.error("Error importing data:", event.target.error);
+                                        alert('Error importing data.');
+                                    };
                                 } else {
                                     alert('Invalid data format');
                                 }
@@ -921,12 +987,7 @@
 
                 function clearData() {
                     if (confirm('Are you sure you want to delete ALL workout data for the current user? This cannot be undone.')) {
-                        workouts = [];
-                        localStorage.removeItem(`workoutData_${loggedInUser}`);
-                        workoutTableBody.innerHTML = '';
-                        chartContainer.innerHTML = '';
-                        weeklyStats.innerHTML = '';
-                        charts = {};
+                        clearIndexedDBData();
                     }
                 }
 
