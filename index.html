@@ -139,8 +139,7 @@
         }
 
         #workoutForm input,
-        #workoutForm select,
-        #workoutForm textarea {
+        #workoutForm select {
             width: 100%;
             padding: 12px;
             border: 1px solid var(--border);
@@ -148,9 +147,15 @@
             font-size: 16px;
         }
 
-        #workoutForm textarea {
-            resize: vertical;
-            min-height: 80px;
+        #techniquePointers {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
         }
 
         #workoutForm button {
@@ -359,7 +364,7 @@
 
             <div class="form-group">
                 <label for="techniquePointers">Technique Pointers</label>
-                <textarea id="techniquePointers" readonly placeholder="Select an exercise to view technique pointers"></textarea>
+                <div id="techniquePointers" placeholder="Select an exercise to view technique pointers"></div>
             </div>
 
             <button type="submit">Add Workout</button>
@@ -500,35 +505,35 @@
                 };
 
                 const exerciseTechniques = {
-                    'Bench Press': `Sets and Reps: Three sets. Week 1: 6 reps, Week 2: 7 reps, Week 3: 8 reps, Week 4: back to 6 reps with more weight.
-Grip and Arch: Use a wider grip and a bigger arch compared to the first upper body day...
-Execution: Use explosive power off the chest... Lower the weight back down under control... Bring the bar down to the highest contact point on your chest, pause briefly (half a second), and then explode upwards... Think about pushing the floor away from you.
-Goal: Maximize the weight used while maintaining a full range of motion and proper position.
-The bench press is considered a key overall mass builder for the pecs...`,
-                    'Weighted Wide Grip Pull Up with Two Forced Negatives': `Sets and Reps: Three sets of 8 reps with two forced negatives on every set.
-Execution: Perform 8 reps with a full stretch at the bottom and a full contraction at the top... After the 8th rep, use a box to jump up over the bar...
-Focus: Feel a strong stretch and a strong mind-muscle connection with your lats...
-Progression: If you can't do 8 reps with good form...
-Benefit of Negatives: Heavy negatives may elicit greater motor unit fatigue...`,
-                    'Barbell Floor Press': `Sets and Reps: Two sets of 8 to 10 reps.
-Grip: You can use a standard 1.5 times shoulder-width grip or so...
-Execution: This exercise eliminates leg drive... Start light and progressively overload.
-Benefits: This is considered an underrated exercise for hypertrophy of the pushing muscles...`,
-                    'Unilateral Cable Row': `Sets and Reps: Three sets of twelve reps per side.
-Execution: Isolate each side one at a time...
-Focus: Think about driving the elbows down and in against the sides...`,
-                    'Arnold Press': `Sets and Reps: Two sets of twelve reps.
-Execution: Initiate the press with horizontal shoulder abduction... Then, it transitions into a more standard dumbbell shoulder press... Performing this exercise standing will force you to use lighter weights...
-Benefits: This is a solid overall shoulder builder...`,
-                    'Reverse PEC Deck': `Sets and Reps: Two sets of ten and ten reps (mechanical drop set).
-Execution: For the first ten reps, slouch the upper body forward... For the next ten reps, without resting or dropping weight, straighten the back...
-Intensity: You should be reaching near failure on the first 10 reps...`,
-                    'Rope Tricep Pushdown (21s)': `Sets and Reps: Three sets of 21 total reps...
-Focus: In the bottom half, focus on squeezing the triceps... In the top half, focus on stretching the triceps... The final seven reps are through a full range of motion...
-Intensity: Unlike the compound pressing movements...`,
-                    '(Optional) Constant Tension Preacher Curl': `Sets and Reps: Two sets of 15 to 20 reps.
-Focus: Isolate the biceps by not resting between reps and keeping the hands and forearms as loose as possible... You can even let your wrists go into a bit of extension...
-Reason for Inclusion: To maximize bicep development through direct isolation work...`
+                    'Bench Press': `<strong>Sets and Reps:</strong> Three sets. Week 1: 6 reps, Week 2: 7 reps, Week 3: 8 reps, Week 4: back to 6 reps with more weight.<br><br>
+                        <strong>Grip and Arch:</strong> Use a wider grip and a bigger arch compared to the first upper body day...<br><br>
+                        <strong>Execution:</strong> Use explosive power off the chest... Lower the weight back down under control... Bring the bar down to the highest contact point on your chest, pause briefly (half a second), and then explode upwards... Think about pushing the floor away from you.<br><br>
+                        <strong>Goal:</strong> Maximize the weight used while maintaining a full range of motion and proper position.<br><br>
+                        The bench press is considered a key overall mass builder for the pecs...`,
+                    'Weighted Wide Grip Pull Up with Two Forced Negatives': `<strong>Sets and Reps:</strong> Three sets of 8 reps with two forced negatives on every set.<br><br>
+                        <strong>Execution:</strong> Perform 8 reps with a full stretch at the bottom and a full contraction at the top... After the 8th rep, use a box to jump up over the bar...<br><br>
+                        <strong>Focus:</strong> Feel a strong stretch and a strong mind-muscle connection with your lats...<br><br>
+                        <strong>Progression:</strong> If you can't do 8 reps with good form...<br><br>
+                        <strong>Benefit of Negatives:</strong> Heavy negatives may elicit greater motor unit fatigue...`,
+                    'Barbell Floor Press': `<strong>Sets and Reps:</strong> Two sets of 8 to 10 reps.<br><br>
+                        <strong>Grip:</strong> You can use a standard 1.5 times shoulder-width grip or so...<br><br>
+                        <strong>Execution:</strong> This exercise eliminates leg drive... Start light and progressively overload.<br><br>
+                        <strong>Benefits:</strong> This is considered an underrated exercise for hypertrophy of the pushing muscles...`,
+                    'Unilateral Cable Row': `<strong>Sets and Reps:</strong> Three sets of twelve reps per side.<br><br>
+                        <strong>Execution:</strong> Isolate each side one at a time...<br><br>
+                        <strong>Focus:</strong> Think about driving the elbows down and in against the sides...`,
+                    'Arnold Press': `<strong>Sets and Reps:</strong> Two sets of twelve reps.<br><br>
+                        <strong>Execution:</strong> Initiate the press with horizontal shoulder abduction... Then, it transitions into a more standard dumbbell shoulder press... Performing this exercise standing will force you to use lighter weights...<br><br>
+                        <strong>Benefits:</strong> This is a solid overall shoulder builder...`,
+                    'Reverse PEC Deck': `<strong>Sets and Reps:</strong> Two sets of ten and ten reps (mechanical drop set).<br><br>
+                        <strong>Execution:</strong> For the first ten reps, slouch the upper body forward... For the next ten reps, without resting or dropping weight, straighten the back...<br><br>
+                        <strong>Intensity:</strong> You should be reaching near failure on the first 10 reps...`,
+                    'Rope Tricep Pushdown (21s)': `<strong>Sets and Reps:</strong> Three sets of 21 total reps...<br><br>
+                        <strong>Focus:</strong> In the bottom half, focus on squeezing the triceps... In the top half, focus on stretching the triceps... The final seven reps are through a full range of motion...<br><br>
+                        <strong>Intensity:</strong> Unlike the compound pressing movements...`,
+                    '(Optional) Constant Tension Preacher Curl': `<strong>Sets and Reps:</strong> Two sets of 15 to 20 reps.<br><br>
+                        <strong>Focus:</strong> Isolate the biceps by not resting between reps and keeping the hands and forearms as loose as possible... You can even let your wrists go into a bit of extension...<br><br>
+                        <strong>Reason for Inclusion:</strong> To maximize bicep development through direct isolation work...`
                 };
 
                 let workouts = JSON.parse(localStorage.getItem(`workoutData_${loggedInUser}`)) || [];
@@ -541,7 +546,7 @@ Reason for Inclusion: To maximize bicep development through direct isolation wor
                 const weeklyVolumeChartCtx = document.getElementById('weeklyVolumeChart');
                 const weeklyStats = document.getElementById('weeklyStats');
                 const exerciseSelect = document.getElementById('exercise');
-                const techniquePointersTextarea = document.getElementById('techniquePointers');
+                const techniquePointersDiv = document.getElementById('techniquePointers');
 
                 // Initialize exercise dropdown
                 updateExerciseDropdown();
@@ -554,12 +559,9 @@ Reason for Inclusion: To maximize bicep development through direct isolation wor
                 document.getElementById('clearDataBtn').addEventListener('click', clearData);
                 exerciseSelect.addEventListener('change', displayTechniquePointers);
 
-                // Load saved data
-                loadWorkouts();
-
                 function displayTechniquePointers() {
                     const selectedExercise = exerciseSelect.value;
-                    techniquePointersTextarea.value = exerciseTechniques[selectedExercise] || '';
+                    techniquePointersDiv.innerHTML = exerciseTechniques[selectedExercise] || '';
                 }
 
                 // ========== TIMER FUNCTIONALITY ==========
@@ -639,7 +641,7 @@ Reason for Inclusion: To maximize bicep development through direct isolation wor
                 function updateExerciseDropdown() {
                     const type = document.getElementById('workoutType').value;
                     const exerciseSelect = document.getElementById('exercise');
-                    const techniquePointersTextarea = document.getElementById('techniquePointers');
+                    const techniquePointersDiv = document.getElementById('techniquePointers');
 
                     exerciseSelect.innerHTML = '';
                     if (workoutPlans[type]) {
@@ -650,7 +652,7 @@ Reason for Inclusion: To maximize bicep development through direct isolation wor
                             exerciseSelect.appendChild(option);
                         });
                     }
-                    techniquePointersTextarea.value = ''; // Clear technique pointers when workout type changes
+                    techniquePointersDiv.innerHTML = ''; // Clear technique pointers when workout type changes
                 }
 
                 function handleFormSubmit(e) {
